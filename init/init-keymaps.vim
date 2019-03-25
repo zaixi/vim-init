@@ -15,6 +15,30 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
+"----------------------------------------------------------------------
+" 杂项映射
+"----------------------------------------------------------------------
+let mapleader=";"
+nnoremap <Space> :
+" 使用tab在可视模式下缩进
+xnoremap <Tab> >gv|
+xnoremap <S-Tab> <gv
+nnoremap > >>_
+nnoremap < <<_
+
+if (has('xterm_clipboard'))
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+else
+vnoremap <leader>y :call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
+nnoremap <leader>p :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p")")")"))
+endif
+
+nnoremap Y y$
+noremap <silent><leader>/ :nohls<CR>
+nnoremap <F10> :set number!<CR>
+"全文缩进
+nnoremap <F12> gg=G
 
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
@@ -30,15 +54,26 @@ inoremap <c-_> <c-k>
 " 使用 SecureCRT/XShell 等终端软件需设置：Backspace sends delete
 " 详见：http://www.skywind.me/blog/archives/2021
 "----------------------------------------------------------------------
-noremap <C-h> <left>
-noremap <C-j> <down>
-noremap <C-k> <up>
-noremap <C-l> <right>
+" 窗口间切换
+nnoremap <C-h>     <C-w>h
+nnoremap <C-LEFT>  <C-w>h
+nnoremap <C-j>     <C-w>j
+nnoremap <C-DOWN>  <C-w>j
+nnoremap <C-k>     <C-w>k
+nnoremap <C-UP>    <C-w>k
+nnoremap <C-l>     <C-w>l
+nnoremap <C-RIGHT> <C-w>l
+
 inoremap <C-h> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
 
+"----------------------------------------------------------------------
+" 普通模式的快速移动
+"----------------------------------------------------------------------
+nnoremap lb 0
+nnoremap le $
 
 "----------------------------------------------------------------------
 " 命令模式的快速移动

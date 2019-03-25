@@ -41,6 +41,28 @@ set ttimeoutlen=50
 " 显示光标位置
 set ruler
 
+" 光标移动到顶部和底部时保持几行距离
+set scrolloff=8
+
+" 历史记录数
+"set history=1000
+
+" 共享剪贴板
+set clipboard+=unnamed
+
+" 允许在有未保存的修改时切换缓冲区
+set hidden
+
+" 补全菜单以列表和完整补全同时出现
+set wildmode=list:full
+
+" 以下字符被视为单词的一部分
+set iskeyword+=<,>,:,_,$,@,%,#,-
+
+"set noerrorbells                    " 关闭错误信息响铃
+"set novisualbell                    " 关闭可视化响铃代替呼叫
+"set t_vb=                           " 置空错误响铃终端代码
+
 
 "----------------------------------------------------------------------
 " 搜索设置
@@ -63,6 +85,15 @@ set incsearch
 " 编码设置
 "----------------------------------------------------------------------
 if has('multi_byte')
+	" 终端使用的编码方式
+	set termencoding=utf-8
+
+	" 菜单翻译的语言
+	set langmenu=zh_CN.UTF-8
+
+	" 消息语言为中文
+	set helplang=cn
+
 	" 内部工作编码
 	set encoding=utf-8
 
@@ -85,9 +116,9 @@ endif
 "----------------------------------------------------------------------
 " 语法高亮设置
 "----------------------------------------------------------------------
-if has('syntax')  
-	syntax enable 
-	syntax on 
+if has('syntax')
+	syntax enable
+	syntax on
 endif
 
 
@@ -130,6 +161,8 @@ set formatoptions+=B
 " 文件换行符，默认使用 unix 换行符
 set ffs=unix,dos,mac
 
+" 自动补全的高度
+set pumheight=15
 
 "----------------------------------------------------------------------
 " 设置代码折叠
@@ -139,7 +172,10 @@ if has('folding')
 	set foldenable
 
 	" 代码折叠默认使用缩进
-	set fdm=indent
+	set foldmethod=indent
+
+	" 代码折叠默认使用标记
+	"set foldmethod=marker
 
 	" 默认打开所有缩进
 	set foldlevel=99

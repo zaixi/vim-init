@@ -14,6 +14,7 @@
 "----------------------------------------------------------------------
 if $TMUX != ''
 	set ttimeoutlen=30
+	set ttyfast                     " 在老式终端上平滑绘制
 elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
 	set ttimeoutlen=80
 endif

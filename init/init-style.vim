@@ -28,8 +28,8 @@ set showtabline=2
 " 设置显示制表符等隐藏字符
 set list
 
-" 右下角显示命令
-set showcmd
+" 关闭右下角显示命令
+set noshowcmd
 
 " 插入模式在状态栏下面显示 -- INSERT --，
 " 先注释掉，默认已经为真了，如果这里再设置一遍会影响 echodoc 插件
@@ -37,6 +37,15 @@ set showcmd
 
 " 水平切割窗口时，默认在右边显示新窗口
 set splitright
+
+" 高亮光标所在列
+"set cursorcolumn
+
+" 高亮光标所在行
+"set cursorline
+
+" 填充状态行和垂直分割线的字符
+set fillchars=vert:│,fold:·
 
 
 "----------------------------------------------------------------------
