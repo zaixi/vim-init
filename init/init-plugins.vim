@@ -34,7 +34,8 @@ endfunc
 "----------------------------------------------------------------------
 " 在 ~/.vim/bundles 下安装插件
 "----------------------------------------------------------------------
-call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
+call plug#begin(get(g:, 'bundle_home', s:path("bundles")))
+"call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 
 
 "----------------------------------------------------------------------
