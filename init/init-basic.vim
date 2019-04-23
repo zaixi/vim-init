@@ -57,7 +57,7 @@ set hidden
 set wildmode=list:full
 
 " 以下字符被视为单词的一部分
-set iskeyword+=<,>,:,_,$,@,%,#,-
+set iskeyword+=<,>,_,$,@,%,#,-
 
 "set noerrorbells                    " 关闭错误信息响铃
 "set novisualbell                    " 关闭可视化响铃代替呼叫
@@ -130,7 +130,7 @@ endif
 set showmatch
 
 " 显示括号匹配的时间
-set matchtime=2
+set matchtime=1
 
 " 显示最后一行
 set display=lastline
@@ -172,13 +172,13 @@ if has('folding')
 	set foldenable
 
 	" 代码折叠默认使用缩进
-	set foldmethod=indent
+	"set foldmethod=indent
 
 	" 代码折叠默认使用标记
-	"set foldmethod=marker
+	set foldmethod=marker
 
 	" 默认打开所有缩进
-	set foldlevel=99
+	" set foldlevel=99
 endif
 
 

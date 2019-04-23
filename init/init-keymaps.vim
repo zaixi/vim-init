@@ -18,27 +18,23 @@
 "----------------------------------------------------------------------
 " 杂项映射
 "----------------------------------------------------------------------
-let mapleader=";"
 nnoremap <Space> :
 " 使用tab在可视模式下缩进
 xnoremap <Tab> >gv|
 xnoremap <S-Tab> <gv
 nnoremap > >>_
 nnoremap < <<_
+" 使用tab在普通模式下切换窗口
+nnoremap <silent> <Tab> :wincmd w<CR>
+nnoremap <silent> <S-Tab> :wincmd p<CR>
 
-if (has('xterm_clipboard'))
-vnoremap <leader>y "+y
-nnoremap <leader>p "+p
-else
-vnoremap <leader>y :call system("xclip -i -selection clipboard", getreg("\""))<CR>:call system("xclip -i", getreg("\""))<CR>
-nnoremap <leader>p :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p")")")"))
-endif
+"----------------------------------------------------------------------
+" 缓存：插件 unimpaired 中定义了 [b, ]b 来切换缓存
+"----------------------------------------------------------------------
 
-nnoremap Y y$
-noremap <silent><leader>/ :nohls<CR>
-nnoremap <F10> :set number!<CR>
-"全文缩进
-nnoremap <F12> gg=G
+LeaderMap  'bn', ':bn', '下一个buffer'
+LeaderMap  'bp', ':bp', '上一个buffer'
+LeaderMap  'bd', ':bd', '删除此buffer'
 
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
@@ -91,114 +87,6 @@ cnoremap <c-_> <c-k>
 
 
 "----------------------------------------------------------------------
-" <leader>+数字键 切换tab
-"----------------------------------------------------------------------
-noremap <silent><leader>1 1gt<cr>
-noremap <silent><leader>2 2gt<cr>
-noremap <silent><leader>3 3gt<cr>
-noremap <silent><leader>4 4gt<cr>
-noremap <silent><leader>5 5gt<cr>
-noremap <silent><leader>6 6gt<cr>
-noremap <silent><leader>7 7gt<cr>
-noremap <silent><leader>8 8gt<cr>
-noremap <silent><leader>9 9gt<cr>
-noremap <silent><leader>0 10gt<cr>
-
-
-"----------------------------------------------------------------------
-" ALT+N 切换 tab
-"----------------------------------------------------------------------
-noremap <silent><m-1> :tabn 1<cr>
-noremap <silent><m-2> :tabn 2<cr>
-noremap <silent><m-3> :tabn 3<cr>
-noremap <silent><m-4> :tabn 4<cr>
-noremap <silent><m-5> :tabn 5<cr>
-noremap <silent><m-6> :tabn 6<cr>
-noremap <silent><m-7> :tabn 7<cr>
-noremap <silent><m-8> :tabn 8<cr>
-noremap <silent><m-9> :tabn 9<cr>
-noremap <silent><m-0> :tabn 10<cr>
-inoremap <silent><m-1> <ESC>:tabn 1<cr>
-inoremap <silent><m-2> <ESC>:tabn 2<cr>
-inoremap <silent><m-3> <ESC>:tabn 3<cr>
-inoremap <silent><m-4> <ESC>:tabn 4<cr>
-inoremap <silent><m-5> <ESC>:tabn 5<cr>
-inoremap <silent><m-6> <ESC>:tabn 6<cr>
-inoremap <silent><m-7> <ESC>:tabn 7<cr>
-inoremap <silent><m-8> <ESC>:tabn 8<cr>
-inoremap <silent><m-9> <ESC>:tabn 9<cr>
-inoremap <silent><m-0> <ESC>:tabn 10<cr>
-
-
-" MacVim 允许 CMD+数字键快速切换标签
-if has("gui_macvim")
-	set macmeta
-	noremap <silent><d-1> :tabn 1<cr>
-	noremap <silent><d-2> :tabn 2<cr>
-	noremap <silent><d-3> :tabn 3<cr>
-	noremap <silent><d-4> :tabn 4<cr>
-	noremap <silent><d-5> :tabn 5<cr>
-	noremap <silent><d-6> :tabn 6<cr>
-	noremap <silent><d-7> :tabn 7<cr>
-	noremap <silent><d-8> :tabn 8<cr>
-	noremap <silent><d-9> :tabn 9<cr>
-	noremap <silent><d-0> :tabn 10<cr>
-	inoremap <silent><d-1> <ESC>:tabn 1<cr>
-	inoremap <silent><d-2> <ESC>:tabn 2<cr>
-	inoremap <silent><d-3> <ESC>:tabn 3<cr>
-	inoremap <silent><d-4> <ESC>:tabn 4<cr>
-	inoremap <silent><d-5> <ESC>:tabn 5<cr>
-	inoremap <silent><d-6> <ESC>:tabn 6<cr>
-	inoremap <silent><d-7> <ESC>:tabn 7<cr>
-	inoremap <silent><d-8> <ESC>:tabn 8<cr>
-	inoremap <silent><d-9> <ESC>:tabn 9<cr>
-	inoremap <silent><d-0> <ESC>:tabn 10<cr>
-endif
-
-
-
-"----------------------------------------------------------------------
-" 缓存：插件 unimpaired 中定义了 [b, ]b 来切换缓存
-"----------------------------------------------------------------------
-noremap <silent> <leader>bn :bn<cr>
-noremap <silent> <leader>bp :bp<cr>
-
-
-"----------------------------------------------------------------------
-" TAB：创建，关闭，上一个，下一个，左移，右移
-" 其实还可以用原生的 CTRL+PageUp, CTRL+PageDown 来切换标签
-"----------------------------------------------------------------------
-
-noremap <silent> <leader>tc :tabnew<cr>
-noremap <silent> <leader>tq :tabclose<cr>
-noremap <silent> <leader>tn :tabnext<cr>
-noremap <silent> <leader>tp :tabprev<cr>
-noremap <silent> <leader>to :tabonly<cr>
-
-
-" 左移 tab
-function! Tab_MoveLeft()
-	let l:tabnr = tabpagenr() - 2
-	if l:tabnr >= 0
-		exec 'tabmove '.l:tabnr
-	endif
-endfunc
-
-" 右移 tab
-function! Tab_MoveRight()
-	let l:tabnr = tabpagenr() + 1
-	if l:tabnr <= tabpagenr('$')
-		exec 'tabmove '.l:tabnr
-	endif
-endfunc
-
-noremap <silent><leader>tl :call Tab_MoveLeft()<cr>
-noremap <silent><leader>tr :call Tab_MoveRight()<cr>
-noremap <silent><m-left> :call Tab_MoveLeft()<cr>
-noremap <silent><m-right> :call Tab_MoveRight()<cr>
-
-
-"----------------------------------------------------------------------
 " ALT 键移动增强
 "----------------------------------------------------------------------
 
@@ -217,11 +105,6 @@ inoremap <m-k> <c-\><c-o>gk
 " 命令模式下的相同快捷
 cnoremap <m-h> <c-left>
 cnoremap <m-l> <c-right>
-
-" ALT+y 删除到行末
-noremap <m-y> d$
-inoremap <m-y> <c-\><c-o>d$
-
 
 "----------------------------------------------------------------------
 " 窗口切换：ALT+SHIFT+hjkl
@@ -262,15 +145,6 @@ endif
 " 编译运行 C/C++ 项目
 " 详细见：http://www.skywind.me/blog/archives/2084
 "----------------------------------------------------------------------
-
-" 自动打开 quickfix window ，高度为 6
-let g:asyncrun_open = 6
-
-" 任务结束时候响铃提醒
-let g:asyncrun_bell = 1
-
-" 设置 F10 打开/关闭 Quickfix 窗口
-nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " F9 编译 C/C++ 文件
 nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
@@ -351,7 +225,7 @@ endfunc
 "----------------------------------------------------------------------
 if executable('rg')
 	noremap <silent><F2> :AsyncRun! -cwd=<root> rg -n --no-heading 
-				\ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim 
+				\ --color never 
 				\ <C-R><C-W> "<root>" <cr>
 elseif has('win32') || has('win64')
 	noremap <silent><F2> :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>" 
