@@ -10,6 +10,13 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
 
+function! Layer_ui_after_config() abort
+  " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
+  "color desert256
+  let g:rehash256 = 1
+  colorscheme molokai
+endfunction
+
 " vim-matchup 设置
 let g:matchup_matchparen_status_offscreen = 0
 

@@ -12,5 +12,7 @@ Plug 'vim-python/python-syntax', { 'for': ['python'] }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " vim org-mode
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
+" txt
+Plug 'vim-scripts/txt.vim'
 " 语法高亮集合包
 Plug 'sheerun/vim-polyglot'

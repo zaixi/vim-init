@@ -3,7 +3,7 @@ Plug 'mhinz/vim-signify'
 " Git 支持
 Plug 'tpope/vim-fugitive', {'on' : [
 			\'Gdiff',
-			\'Git push',
+			\'Gpush',
 			\'Gblame',
 			\'Gstatus',
 			\'GV',
@@ -24,7 +24,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': [
 Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
 
 LeaderMap 'gd', 'Gdiff',            'git diff'
-LeaderMap 'gp', 'Git push',         'git push'
+LeaderMap 'gp', 'Gpush',            'git push'
 LeaderMap 'gb', 'Gblame',           'git blame'
 LeaderMap 'gs', 'Gstatus',          'git status'
 LeaderMap 'ga', ':Gina add %',      'git add 当前文件'

@@ -70,7 +70,7 @@ LeaderMap  'ww', 'ChooseWin',             '选择窗口'
 LeaderMap  'wm', 'ChooseWinSwap',         '交换窗口'
 LeaderMap  'wd', '<c-w>c',                '删除窗口'
 LeaderMap  'lp', '<Plug>MarkdownPreview', 'Markdown预览'
-LeaderName 'mm', '标签'
+LeaderName 'mm', '+标签'
 call LeaderMappingDef('mma', 'm.',  '添加标签')
 call LeaderMappingDef('mmd', 'm\<space>',  '删除所有标签')
 call LeaderMappingDef('mmn', ']`',  '上一个标签')
