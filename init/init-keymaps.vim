@@ -25,8 +25,8 @@ xnoremap <S-Tab> <gv
 nnoremap > >>_
 nnoremap < <<_
 " 使用tab在普通模式下切换窗口
-nnoremap <silent> <Tab> :wincmd w<CR>
-nnoremap <silent> <S-Tab> :wincmd p<CR>
+" nnoremap <silent> <Tab> :wincmd w<CR>
+" nnoremap <silent> <S-Tab> :wincmd p<CR>
 
 "----------------------------------------------------------------------
 " 缓存：插件 unimpaired 中定义了 [b, ]b 来切换缓存
@@ -64,12 +64,6 @@ inoremap <C-h> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
-
-"----------------------------------------------------------------------
-" 普通模式的快速移动
-"----------------------------------------------------------------------
-nnoremap lb 0
-nnoremap le $
 
 "----------------------------------------------------------------------
 " 命令模式的快速移动

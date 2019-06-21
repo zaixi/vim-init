@@ -1,5 +1,5 @@
 " 标签浏览
-Plug 'majutsushi/tagbar', {'on' : ['TagbarToggle']}
+Plug 'majutsushi/tagbar'
 " Makefile 标签扩展
 Plug 'tenfyzhong/tagbar-makefile.vim', {'on' : ['TagbarToggle']}
 " 提供 ctags/gtags 后台数据库自动更新功能
@@ -46,7 +46,6 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " 禁止 gutentags 自动链接 gtags 数据库
 let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_plus_nomap = 1
-map <C-]> :GscopeFind g <C-R><C-W><cr>
 
 function! g:Cscope_find(type)
 	if a:type ==# 'f' || a:type ==# 'i'
@@ -57,6 +56,20 @@ function! g:Cscope_find(type)
 		exec ":GscopeFind ".a:type." ".l:cword
 	endif
 endfunction
+
+function! g:Find_set()
+	call Cscope_find('g')
+	if &ft ==# 'qf'
+		if (len(getqflist()) == 2)
+			silent! cclose
+			silent! cnext
+		else
+			call cursor(2, 1)
+		endif
+	endif
+endfunction
+
+map <C-]> :call g:Find_set()<CR>
 " }}}
 
 let tagbar_left = 1
