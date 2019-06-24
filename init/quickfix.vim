@@ -4,7 +4,7 @@ Plug 'skywind3000/asyncrun.vim', {'on_cmd': 'AsyncRun'}
 " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
 Plug 'mh21/errormarker.vim', {'on' : ['RemoveErrorMarkers']}
 " 使用 <space>ha 清除 errormarker 标注的错误
-noremap <silent><space>ha :RemoveErrorMarkers<cr>
+"noremap <silent><space>ha :RemoveErrorMarkers<cr>
 
 " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
 Plug 'skywind3000/vim-preview', {'on' : [
