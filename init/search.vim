@@ -24,6 +24,7 @@ let g:ctrlsf_auto_close   = 0
 " Leaderf 设置 {{{
 " CTRL+p 打开文件模糊匹配
 let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_ShortcutB = ''
 " 最大历史文件保存 2048 个
 let g:Lf_MruMaxFiles = 2048
 
