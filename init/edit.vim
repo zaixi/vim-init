@@ -333,8 +333,22 @@ call LeaderMappingDef('xiU', function('s:up_case'),        '转换为宏定义')
 call LeaderMappingDef('xtt', function('Spa2Tab'),  '空格转Tab')
 call LeaderMappingDef('xt ', function('Tab2Spa'),  'Tab转空格')
 
-call LeaderMappingDef('xy', 'call feedkeys("\"+y")',  '复制到系统')
-call LeaderMappingDef('xp', 'call feedkeys("\"+p")',  '从系统粘贴')
+function! s:copy2system()
+  let l:save_register = @"
+  normal! y
+  let @+ = @"
+  let @" = l:save_register
+endfunction
+
+function! s:paste2system()
+  let l:save_register = @"
+  let @" = @+
+  normal! p
+  let @" = l:save_register
+endfunction
+
+call LeaderMappingDef('xy', function('s:copy2system'),  '复制到系统')
+call LeaderMappingDef('xp', function('s:paste2system'), '从系统粘贴')
 
 call LeaderMappingDef('xrc', ":call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))",  '询问替换')
 call LeaderMappingDef('xrw', ":call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))",  '直接替换')
