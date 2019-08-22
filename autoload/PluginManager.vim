@@ -79,6 +79,11 @@ function! s:install_manager(plugins_dir) abort
         silent exec '!git clone https://github.com/junegunn/vim-plug "'
               \ . expand(a:plugins_dir)
               \ . join(['vim-plug"'], s:Fsep)
+        silent exec '!ln -s '
+              \ . expand(a:plugins_dir)
+              \ . join(['vim-plug', 'plug.vim'], s:Fsep)
+              \ . " "
+              \. join([fnamemodify(resolve(expand('<sfile>:p')), ':h'), 'autoload'], s:Fsep )
         let g:_plug_installed = 1
       else
         echohl WarningMsg
