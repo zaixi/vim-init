@@ -57,7 +57,8 @@ set hidden
 set wildmode=list:full
 
 " 以下字符被视为单词的一部分
-set iskeyword+=<,>,_,@,%,#
+"set iskeyword+=<,>,_,@,%,#
+set iskeyword+=<,_,@,%,#
 
 "set noerrorbells                    " 关闭错误信息响铃
 "set novisualbell                    " 关闭可视化响铃代替呼叫
