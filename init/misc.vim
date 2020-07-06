@@ -7,8 +7,6 @@ if !argc()
 	let g:startify_disable_at_vimenter = 0
 	let g:startify_session_dir = '~/.vim/session'
 endif
-" 一次性安装一大堆 colorscheme
-Plug 'flazz/vim-colorschemes'
 " 支持库，给其他插件用的函数库
 Plug 'xolox/vim-misc'
 " vim 中文文档
@@ -53,6 +51,8 @@ function! WindowSmartClose() abort
       let num = num - 1
     endif
     if getbufvar(winbufnr(i),'&buftype') ==# 'quickfix'
+      let num = num - 1
+    elseif getwinvar(i, '&previewwindow') == 1 && winnr() !=# i
       let num = num - 1
     endif
   endfor

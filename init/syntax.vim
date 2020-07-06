@@ -15,4 +15,4 @@ Plug 'jceb/vim-orgmode', { 'for': 'org' }
 " txt
 Plug 'vim-scripts/txt.vim', { 'for': 'txt' }
 " 语法高亮集合包
-"Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
