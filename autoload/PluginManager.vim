@@ -12,7 +12,7 @@ let g:plugin_manager = 'vim-plug'
 let g:plugin_install_dir = '~/.cache/vimfiles/'
 let g:plugin_mangager_checkinstall = 1
 
-function! s:install_manager(plugins_dir) abort
+function! s:install_manager(plugins_dir, root_dir) abort
   " Fsep && Psep
   if has('win16') || has('win32') || has('win64')
     let s:Psep = ';'
@@ -83,7 +83,7 @@ function! s:install_manager(plugins_dir) abort
               \ . expand(a:plugins_dir)
               \ . join(['vim-plug', 'plug.vim'], s:Fsep)
               \ . " "
-              \. join([fnamemodify(resolve(expand('<sfile>:p')), ':h'), 'autoload'], s:Fsep )
+              \. join([a:root_dir, 'autoload'], s:Fsep )
         let g:_plug_installed = 1
       else
         echohl WarningMsg
@@ -154,8 +154,8 @@ function! PluginManager#ShowPlugins() abort
   endfor
 endfunction
 
-function! PluginManager#begin(path) abort
-  call s:install_manager(a:path)
+function! PluginManager#begin(path, root_path) abort
+  call s:install_manager(a:path, a:root_path)
   let g:plugin_install_dir = a:path
 endfunction
 

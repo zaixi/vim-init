@@ -173,7 +173,8 @@ function! Layer#Init(layer_path, ...) abort
 endfunction
 
 function! Layer#Load() abort
-  call PluginManager#begin(s:plug_path)
+  let s:root_dir = join(split(s:layer_path, "/")[0:-2], "/")
+  call PluginManager#begin(s:plug_path, s:root_dir)
   PM 'liuchengxu/vim-which-key'
   for layer in s:layers
 	  call s:Source(layer)
