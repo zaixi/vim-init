@@ -13,6 +13,8 @@ Plug 'vim-airline/vim-airline-themes'
 " 目录树
 Plug 'scrooloose/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
+" tmux <-> vim 切换
+Plug 'christoomey/vim-tmux-navigator'
 
 function! Layer_ui_after_config() abort
   " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
@@ -22,6 +24,12 @@ function! Layer_ui_after_config() abort
   " colorscheme onedark
   " colorscheme one
   colorscheme solarized8_dark
+
+  " <c-left> <c-down> <c-up> <c-right> tmux <-> vim 切换
+  nnoremap <silent> <c-left> :TmuxNavigateLeft<cr>
+  nnoremap <silent> <c-down> :TmuxNavigateDown<cr>
+  nnoremap <silent> <c-up> :TmuxNavigateUp<cr>
+  nnoremap <silent> <c-right> :TmuxNavigateRight<cr>
 endfunction
 
 " vim-matchup 设置
