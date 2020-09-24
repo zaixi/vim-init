@@ -49,12 +49,21 @@ function! s:mapping_name(key_dict, key, name)abort
   endif
 endfunction
 
+function! g:Exec_in_cword(cmd)
+    exec ":".a:cmd." ".expand("<cword>")
+endfunction
+
 function! g:LeaderMappingName(key, name)abort
   call s:mapping_name(g:leader_key_map, a:key, a:name)
 endfunction
 
 function! g:LeaderMappingDef(key, value, desc)abort
   call s:mapping_def(g:leader_key_map, a:key, a:value, a:desc)
+endfunction
+
+function! g:LeaderMappingDefExec(key, cmd, desc)abort
+  let l:cmd = "Exec_in_cword('".a:cmd."')"
+  call LeaderMappingDef(a:key, l:cmd, a:desc)
 endfunction
 
 function! g:LocalleaderMappingName(key, name)abort
@@ -175,6 +184,7 @@ endfunction
 function! Layer#Load() abort
   let s:root_dir = join(split(s:layer_path, "/")[0:-2], "/")
   call PluginManager#begin(s:plug_path, s:root_dir)
+  let g:which_key_use_floating_win = 0
   PM 'liuchengxu/vim-which-key'
   for layer in s:layers
 	  call s:Source(layer)

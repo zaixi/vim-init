@@ -1,7 +1,7 @@
 " 快速文件搜索
-Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf'
 " 使用 :FlyGrep 命令进行实时 grep
-Plug 'wsdjeg/FlyGrep.vim', {'on' : ['FlyGrep']}
+"Plug 'wsdjeg/FlyGrep.vim', {'on' : ['FlyGrep']}
 " 使用 :CtrlSF 命令进行模仿 sublime 的 grep
 Plug 'dyng/ctrlsf.vim', {'on' : ['CtrlSF']}
 " 模糊搜索(代替fzf)
@@ -27,6 +27,15 @@ let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_ShortcutB = ''
 " 最大历史文件保存 2048 个
 let g:Lf_MruMaxFiles = 2048
+
+" 主窗口使用浮动窗口
+"let g:Lf_WindowPosition = 'popup'
+" 预览窗口使用浮动窗口
+let g:Lf_PreviewInPopup = 1
+" 预览窗口主题
+let g:Lf_PopupColorscheme='gruvbox_default'
+" 预览窗口在屏幕中央
+let g:Lf_PreviewHorizontalPosition='center'
 
 " ui 定制
 let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
@@ -66,6 +75,13 @@ let g:Lf_NormalMap = {
 			\ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
 			\ }
 
+let g:Lf_RgConfig = [
+	\ "--max-columns=150",
+	\ "--type-add web:*.{html,css,js}*",
+	\ "--glob=!git/*",
+	\ "--hidden"
+    \ ]
+
 function! LeaderfFindFile()
  let save_iskeyword = &iskeyword
  set iskeyword-=<,>
@@ -73,6 +89,15 @@ function! LeaderfFindFile()
  let l:word = expand('<cword>')
  silent exec 'Leaderf file --cword'
  exec 'set iskeyword='.save_iskeyword
+endfunction
+
+function! g:Exec_in_visual(cmd)
+	let l:word=leaderf#Rg#visual()
+	exec ":".a:cmd." ".l:word
+endfunction
+function! g:LeaderMappingDefLeaderf(key, cmd, desc)abort
+	let l:cmd = "Exec_in_visual('".a:cmd."')"
+	call LeaderMappingDef(a:key, l:cmd, a:desc)
 endfunction
 "}}}
 
@@ -86,3 +111,13 @@ LeaderMap 'sF', 'LeaderfFindFile', '搜索光标下文件'
 LeaderMap 'sf', 'LeaderfFunction', '搜索function'
 LeaderMap 'sm', 'LeaderfMru',      '搜索Mru'
 LeaderMap 'st', 'LeaderfBufTag',   '搜索Buf tag'
+
+LeaderName 'ss', '搜索单词或文本'
+
+call LeaderMappingDefExec('sss', "Leaderf! rg -e", '搜索光标词在工程')
+call LeaderMappingDefExec('ssb', "Leaderf! rg -F --current-buffer -e", '搜索光标词在当前buffer')
+call LeaderMappingDefExec('ssd', "Leaderf! rg -F --all-buffers", '搜索光标词在所有buffer')
+call LeaderMappingDefLeaderf('ssv', "Leaderf! rg -F --stayOpen -e", "搜索视觉模式选择的文本")
+
+call LeaderMappingDefExec('ssa', "Leaderf! rg -g *.h -g *.{c,cpp} -e", '搜索光标词在工程(仅.h .c .cpp)')
+call LeaderMappingDefExec('sst', "Leaderf! rg -t java -t cpp -e", '搜索光标词在工程(排除cpp java)')

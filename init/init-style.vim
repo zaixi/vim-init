@@ -20,7 +20,14 @@ set laststatus=2
 set number
 
 " 总是显示侧边栏（用于显示 mark/gitdiff/诊断信息）
-set signcolumn=yes
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+        " Recently vim can merge signcolumn and number column into one
+        set signcolumn=number
+else
+        set signcolumn=yes
+endif
 
 " 总是显示标签栏
 set showtabline=2
@@ -97,7 +104,7 @@ endif
 hi! SignColumn guibg=NONE ctermbg=NONE
 
 " 修改行号为浅灰色，默认主题的黄色行号很难看，换主题可以仿照修改
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE 
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 	\ gui=NONE guifg=DarkGrey guibg=NONE
 
 " 修正补全目录的色彩：默认太难看
@@ -111,7 +118,7 @@ hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 if has('terminal') && exists(':terminal') == 2
 	if exists('##TerminalOpen')
 		augroup VimUnixTerminalGroup
-			au! 
+			au!
 			au TerminalOpen * setlocal nonumber signcolumn=no
 		augroup END
 	endif
@@ -179,7 +186,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
 		if l:name == ''
 			return '[No Name]'
 		else
-			if a:fullname 
+			if a:fullname
 				return fnamemodify(l:name, ':p')
 			else
 				let aname = fnamemodify(l:name, ':p')
@@ -198,7 +205,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
 		if l:buftype == 'quickfix'
 			return '[Quickfix]'
 		elseif l:name != ''
-			if a:fullname 
+			if a:fullname
 				return '-'.fnamemodify(l:name, ':p')
 			else
 				return '-'.fnamemodify(l:name, ':t')

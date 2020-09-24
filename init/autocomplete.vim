@@ -1,22 +1,27 @@
 " 给不同语言提供字典补全，插入模式下 c-x c-k 触发
 Plug 'asins/vim-dict'
 " 模板补全语法文件
+"Plug 'honza/vim-snippets'
+" 自动补全
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'on_event': 'InsertEnter'}
 Plug 'honza/vim-snippets', { 'on_event': 'InsertEnter' }
+
 " 模板补全
-Plug 'SirVer/ultisnips', { 'on_event': 'InsertEnter' }
+"Plug 'SirVer/ultisnips', { 'on_event': 'InsertEnter' }
 " 超级补全
-Plug 'Valloric/YouCompleteMe', {  'do': './install.py --clang-completer', 'on_event': 'InsertEnter' }
+"Plug 'Valloric/YouCompleteMe', {  'do': './install.py --clang-completer', 'on_event': 'InsertEnter' }
 " 在底部显示函数参数
-Plug 'Shougo/echodoc.vim', { 'on_event': 'InsertEnter' }
+"Plug 'Shougo/echodoc.vim', { 'on_event': 'InsertEnter' }
 " 自动生成超级补全配置
-Plug 'rdnetto/YCM-Generator',  { 'on': ['YcmGenerateConfig', 'CCGenerateConfig']}
+"Plug 'rdnetto/YCM-Generator',  { 'on': ['YcmGenerateConfig', 'CCGenerateConfig']}
 " YcmGenerateConfig
 
 " echodoc.vim 设置
-set noshowmode
-let g:echodoc#enable_at_startup = 1
+"set noshowmode
+"let g:echodoc#enable_at_startup = 1
 
-" ultisnips 设置
+" {{{ ultisnips 设置
 let g:UltiSnipsExpandTrigger = '<c-tab>'
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
@@ -32,11 +37,78 @@ function! Ulti_ExpandOrEnter()
 		return "\<Enter>"
 	endif
 endfunction
+" }}}
 
-inoremap <silent><return> <C-R>=Ulti_ExpandOrEnter()<CR>
+" {{{ coc 设置
+
+let g:coc_config_home = g:home."/tools/conf"
+let g:coc_global_extensions = ['coc-json', 'coc-snippets', 'coc-tag', 'coc-word', 'coc-omni', 'coc-dictionary', 'coc-highlight', 'coc-yank', 'coc-cmake']
+let g:coc_snippet_next = '<tab>'
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+function! g:Show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+function! s:coc_autocmd() abort
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  augroup end
+endfunction
+
+autocmd InsertEnter * silent call s:coc_autocmd()
+
+" }}}
+
+call LeaderMappingDef('ls', ":call Show_documentation()",  '显示文档')
+
+LeaderMap 'ld', '<Plug>(coc-definition)',       '跳转到定义'
+LeaderMap 'ly', '<Plug>(coc-type-definition)',  '跳转到类型定义'
+LeaderMap 'li', '<Plug>(coc-implementation)',   '跳转到实现'
+LeaderMap 'lr', '<Plug>(coc-references)',       '跳转到引用'
+LeaderMap 'ln', '<Plug>(coc-rename)',           '重命名'
+
+LeaderMap 'lo', '<Plug>(coc-refactor)',         '重命名'
+
+LeaderMap 'la', '<Plug>(coc-format-selected)',  '格式化选中区域'
+
+LeaderName 'le', '错误诊断'
+LeaderMap 'lep', '<Plug>(coc-diagnostic-prev)', '跳到上个错误'
+LeaderMap 'len', '<Plug>(coc-diagnostic-next)', '跳到下个错误'
 
 "----------------------------------------------------------------------
-" YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
+"{{{ YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
 "----------------------------------------------------------------------
 
 " 禁用预览功能：扰乱视听
@@ -124,3 +196,8 @@ let g:ycm_filetype_whitelist = {
 			\ "zimbu":1,
 			\ "ps1":1,
 			\ }
+"}}}
+
+function! Layer_autocomplete_after_config() abort
+
+endfunction

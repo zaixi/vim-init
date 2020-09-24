@@ -6,15 +6,15 @@ else
 endif
 
 " 取得本文件所在的目录
-let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let g:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " 将 vim-init 目录加入 runtimepath
-exec 'set rtp+='.s:home
+exec 'set rtp+='.g:home
 
 "----------------------------------------------------------------------
 " 模块加载
 "----------------------------------------------------------------------
-call Layer#Init(s:home."/init")
+call Layer#Init(g:home."/init")
 LeaderName 'x', '+文本'
 LeaderName 't', '+切换'
 LeaderName 'g', '+版本控制'

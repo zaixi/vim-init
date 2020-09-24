@@ -91,11 +91,12 @@ endif
 " 备份设置
 "----------------------------------------------------------------------
 
-" 允许备份
-set backup
+" 不允许备份
+" coc.nvim Some servers have issues with backup files, see #649.
+set nobackup
 
-" 保存时备份
-set writebackup
+" 保存时不备份
+set nowritebackup
 
 " 备份文件地址，统一管理
 set backupdir=~/.vim/tmp
@@ -108,6 +109,16 @@ set noswapfile
 
 " 禁用 undo文件
 set noundofile
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
 " 创建目录，并且忽略可能出现的警告
 silent! call mkdir(expand('~/.vim/tmp'), "p", 0755)

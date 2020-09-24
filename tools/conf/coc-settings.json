@@ -1,0 +1,47 @@
+{
+
+	// Enable preselect feature on neovim, default: `true`
+	"suggest.enablePreselect": true,
+	// Add preview option to `completeopt`, default: `false`
+	"suggest.enablePreview": true,
+	// completion automatically select the first completed
+	"suggest.noselect": false,
+	// "suggest.triggerAfterInsertEnter": true
+	"suggest.minTriggerInputLength": 2,
+	// Target to show hover information, default is floating window when possible.
+	//"coc.preferences.hoverTarget": "preview",
+	// Auto close preview window on cursor move.,  default: `true`
+	"coc.preferences.previewAutoClose": false,
+
+	// 使编辑器在键入;和时格式化代码块和语句}。此功能对类型定界符之前的代码执行选择格式化。它缩进代码并打印漂亮的空格。
+	"coc.preferences.formatOnType": true,
+
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			//"args": ["--param=allow-store-data-races=0", "-W*", "-f*", "-m*"],
+			"filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+			"rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+			"initializationOptions": {
+				"cache": {
+					"directory": "/tmp/ccls"
+				},
+				"client":{
+					"snippetSupport": true
+				}
+			}
+		}
+	}
+//	"clangd.path": "/usr/bin/clangd-10"
+//   "languageserver": {
+//    "clangd": {
+//      "command": "/usr/bin/clangd-10",
+//      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+//      "filetypes": ["c", "cpp", "objc", "objcpp"]
+//    }
+//  }
+}
+
+//{
+//	"clangd.path": "/usr/bin/clangd-10"
+//}
