@@ -20,14 +20,7 @@ set laststatus=2
 set number
 
 " 总是显示侧边栏（用于显示 mark/gitdiff/诊断信息）
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-        " Recently vim can merge signcolumn and number column into one
-        set signcolumn=number
-else
-        set signcolumn=yes
-endif
+set signcolumn=yes
 
 " 总是显示标签栏
 set showtabline=2

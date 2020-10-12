@@ -74,20 +74,20 @@ function! g:Show_documentation()
   endif
 endfunction
 
-function! s:coc_autocmd() abort
+" function! s:coc_autocmd() abort
   " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " autocmd CursorHold * silent call CocActionAsync('highlight')
 
-  augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder.
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  augroup end
-endfunction
+  " augroup mygroup
+  "   autocmd!
+  "   " Setup formatexpr specified filetype(s).
+  "   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  "   " Update signature help on jump placeholder.
+  "   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " augroup end
+" endfunction
 
-autocmd InsertEnter * silent call s:coc_autocmd()
+" autocmd InsertEnter * silent call s:coc_autocmd()
 
 " }}}
 
