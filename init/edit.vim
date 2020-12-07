@@ -27,7 +27,7 @@ Plug 'easymotion/vim-easymotion',  { 'on': [
 " 快速添加环绕符,ds"删除",cs"'修改"为'
 Plug 'tpope/vim-surround'
 " 多行编辑
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 " 增强 . 重复功能
 Plug 'tpope/vim-repeat'
 " 文本对象: {{{

@@ -160,7 +160,7 @@ set formatoptions+=m
 set formatoptions+=B
 
 " 文件换行符，默认使用 unix 换行符
-set ffs=unix,dos,mac
+set ffs=unix
 
 " 自动补全的高度
 set pumheight=15

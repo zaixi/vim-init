@@ -52,13 +52,13 @@ inoremap <c-_> <c-k>
 "----------------------------------------------------------------------
 " 窗口间切换
 nnoremap <C-h>     <C-w>h
-nnoremap <C-LEFT>  <C-w>h
 nnoremap <C-j>     <C-w>j
-nnoremap <C-DOWN>  <C-w>j
 nnoremap <C-k>     <C-w>k
-nnoremap <C-UP>    <C-w>k
 nnoremap <C-l>     <C-w>l
-nnoremap <C-RIGHT> <C-w>l
+" nnoremap <C-LEFT>  <C-w>h
+" nnoremap <C-DOWN>  <C-w>j
+" nnoremap <C-UP>    <C-w>k
+" nnoremap <C-RIGHT> <C-w>l
 
 inoremap <C-h> <left>
 inoremap <C-j> <down>
@@ -85,14 +85,10 @@ cnoremap <c-_> <c-k>
 "----------------------------------------------------------------------
 
 " ALT+h/l 快速左右按单词移动（正常模式+插入模式）
-noremap <m-h> b
-noremap <m-l> w
 inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
 
 " ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转） 
-noremap <m-j> gj
-noremap <m-k> gk
 inoremap <m-j> <c-\><c-o>gj
 inoremap <m-k> <c-\><c-o>gk
 
@@ -109,6 +105,10 @@ noremap <m-H> <c-w>h
 noremap <m-L> <c-w>l
 noremap <m-J> <c-w>j
 noremap <m-K> <c-w>k
+noremap <m-h> <c-w>h
+noremap <m-l> <c-w>l
+noremap <m-j> <c-w>j
+noremap <m-k> <c-w>k
 inoremap <m-H> <esc><c-w>h
 inoremap <m-L> <esc><c-w>l
 inoremap <m-J> <esc><c-w>j
